@@ -3,6 +3,7 @@ package com.gjknockout.test;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.awt.*;
@@ -19,7 +20,11 @@ public class Optionals {
         batch.begin();
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-        font.draw(batch, "Upper left, FPS=" + Gdx.graphics.getFramesPerSecond(), 0, camera.viewportHeight);
+        GlyphLayout layout = new GlyphLayout();
+        String str = "Score:" + Game.score;
+        layout.setText(font,str);
+        font.draw(batch, "FPS:" + Gdx.graphics.getFramesPerSecond(), 0, camera.viewportHeight);
+        font.draw(batch, layout, Game.MAX_WIDTH - layout.width,camera.viewportHeight);
         batch.end();
     }
 }

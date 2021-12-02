@@ -24,8 +24,9 @@ public class Game extends ApplicationAdapter {
     public static boolean rightMove;
     public static boolean upMove;
     public static boolean downMove;
-    public static final int MAX_HEIGHT = 480;
-    public static final int MAX_WIDTH = 800;
+    public static final float MAX_HEIGHT = 480;
+    public static final float MAX_WIDTH = 800;
+    public static int score;
     private Texture playerImg;
     private Texture background;
     private Texture appleImg;
@@ -50,6 +51,7 @@ public class Game extends ApplicationAdapter {
         music = Gdx.audio.newMusic(Gdx.files.internal("Overworld1.ogg"));
         //Start music
         music.setLooping(true);
+        music.setVolume((float) 0.1);
         music.play();
         //create camera
         camera = new OrthographicCamera();
@@ -62,6 +64,7 @@ public class Game extends ApplicationAdapter {
         player.x = MAX_WIDTH / 2 - player.width / 2;
         player.y = 20;
 
+
         apples = new Array<>();
         spawnApple();
 
@@ -69,10 +72,10 @@ public class Game extends ApplicationAdapter {
 
     private void spawnApple() {
         Rectangle apple = new Rectangle();
-        apple.x = MathUtils.random(0, 800 - 32);
-        apple.y = MathUtils.random(0, 480 - 39);
         apple.width = 32;
         apple.height = 39;
+        apple.x = MathUtils.random(0, MAX_WIDTH - apple.width);
+        apple.y = MathUtils.random(MAX_HEIGHT/3, MAX_HEIGHT - apple.height);
         apples.add(apple);
         lastApple = TimeUtils.nanoTime();
     }
@@ -125,6 +128,7 @@ public class Game extends ApplicationAdapter {
             if (apple.y + 64 < 0) iter.remove();
             if (apple.overlaps(player)) {
                 eating.play();
+                score++;
                 iter.remove();
             }
         }
