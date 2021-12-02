@@ -33,6 +33,21 @@ task dist(type: Jar) {
     with jar
 }
 
+dependencies {
+    implementation 'com.bytebreakstudios.gdx:input:1.6.0'
+    implementation 'org.mini2Dx:gdx-input:1.9.13'
+    implementation 'com.badlogicgames.gdx:gdx:1.10.0'
+    implementation 'com.badlogicgames.gdx:gdx-platform:1.10.0'
+    implementation 'com.badlogicgames.gdx:gdx-controllers:1.9.13'
+    implementation 'com.badlogicgames.gdx:gdx-freetype:1.10.0'
+    implementation 'com.badlogicgames.gdx:gdx-box2d:1.10.0'
+    implementation 'com.badlogicgames.gdx:gdx-backend-lwjgl:1.10.0'
+    implementation 'nl.weeaboo.gdx-video:gdx-video:1.0.0-anonl'
+    implementation 'games.spooky.gdx:gdx-gfx:1.0.0'
+    implementation 'com.badlogicgames.gdx:gdx-ai:1.8.2'
+    implementation 'com.badlogicgames.gdx:gdx-openal:0.9.9'
+}
+
 
 dist.dependsOn classes
 

@@ -20,7 +20,6 @@ public class Optionals {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         font.draw(batch, "Upper left, FPS=" + Gdx.graphics.getFramesPerSecond(), 0, camera.viewportHeight);
-        font.draw(batch, "Lower left", 0, font.getLineHeight());
         batch.end();
     }
 }

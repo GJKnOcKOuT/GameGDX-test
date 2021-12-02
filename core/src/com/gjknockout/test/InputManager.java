@@ -2,29 +2,90 @@ package com.gjknockout.test;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-public class InputManager {
+public class InputManager implements InputProcessor {
 
-    public static void render(Entity entity, int MAX_WIDTH, int MAX_HEIGHT, int speed, OrthographicCamera camera) {
-        if (Gdx.input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            entity.x = touchPos.x - 64 / 2;
+    @Override
+    public boolean keyDown(int keycode)
+    {
+        switch (keycode)
+        {
+            case Input.Keys.A:
+            case Input.Keys.LEFT:
+                Game.leftMove = true;
+                break;
+            case Input.Keys.D:
+            case Input.Keys.RIGHT:
+                Game.rightMove = true;
+                break;
+            case Input.Keys.W:
+            case Input.Keys.UP:
+                Game.upMove = true;
+                break;
+            case  Input.Keys.S:
+            case Input.Keys.DOWN:
+                Game.downMove = true;
+                break;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) entity.x -= speed * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) entity.x += speed * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) entity.y += speed * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) entity.y -= speed * Gdx.graphics.getDeltaTime();
+        return true;
+    }
+    @Override
+    public boolean keyUp(int keycode)
+    {
+        switch (keycode)
+        {
+            case Input.Keys.A:
+            case Input.Keys.LEFT:
+                Game.leftMove = false;
+                break;
+            case Input.Keys.D:
+            case Input.Keys.RIGHT:
+                Game.rightMove = false;
+                break;
+            case Input.Keys.W:
+            case Input.Keys.UP:
+                Game.upMove = false;
+                break;
+            case  Input.Keys.S:
+            case Input.Keys.DOWN:
+                Game.downMove = false;
+                break;
+        }
+        return true;
+    }
 
-        // make sure the bucket stays within the screen bounds
-        if (entity.x < 0) entity.x = 0;
-        if (entity.x > MAX_WIDTH - entity.width) entity.x = MAX_WIDTH - entity.width;
-        if (entity.y < 0) entity.y = 0;
-        if (entity.y > MAX_HEIGHT - entity.height) entity.y = MAX_HEIGHT - entity.height;
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
+        return false;
     }
 }
