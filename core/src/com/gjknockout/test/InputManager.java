@@ -9,7 +9,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 public class InputManager implements InputProcessor {
-
+    /*
+    TODO: Add controller inputs to move the player and action moves (Arrow)
+     */
     @Override
     public boolean keyDown(int keycode)
     {

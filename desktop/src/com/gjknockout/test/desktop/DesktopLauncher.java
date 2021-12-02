@@ -6,6 +6,9 @@ import com.gjknockout.test.Game;
 
 public class DesktopLauncher {
     public static void main(String[] arg) {
+        /*
+        TODO: Check all different option that can improve/modify this page to make it more defined
+         */
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.vSyncEnabled = true;
         config.foregroundFPS = 60;

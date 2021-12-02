@@ -9,6 +9,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.awt.*;
 
 public class Optionals {
+    /*
+    TODO: Add different optionals and options this could be the settings tab,
+     * add Vsync
+     * add custom fps in forecground and background, add
+     * add On/Off FPS counter
+     */
     public static boolean showFPS = true;
     public static BitmapFont font = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font.png"), false);
     ;

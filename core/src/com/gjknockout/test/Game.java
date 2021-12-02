@@ -41,6 +41,9 @@ public class Game extends com.badlogic.gdx.Game {
 
     @Override
         public void create() {
+        /*
+        TODO: Separate each different element in his own function and optimize this part
+         */
 
         //Setting the InputProcessor
         InputManager inputProcessor = new InputManager();
