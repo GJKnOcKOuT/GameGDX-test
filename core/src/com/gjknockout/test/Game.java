@@ -19,13 +19,13 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 
 
-public class Game extends ApplicationAdapter {
+public class Game extends com.badlogic.gdx.Game {
     public static boolean leftMove;
     public static boolean rightMove;
     public static boolean upMove;
     public static boolean downMove;
-    public static final float MAX_HEIGHT = 480;
-    public static final float MAX_WIDTH = 800;
+    public static float MAX_HEIGHT = 480;
+    public static float MAX_WIDTH = 800;
     public static int score;
     private Texture playerImg;
     private Texture background;
@@ -37,34 +37,44 @@ public class Game extends ApplicationAdapter {
     private Player player;
     private Array<Rectangle> apples;
     private long lastApple;
+    private double scale = 1;
 
     @Override
-    public void create() {
+        public void create() {
+
+        //Setting the InputProcessor
         InputManager inputProcessor = new InputManager();
         Gdx.input.setInputProcessor(inputProcessor);
-        //load the image file
+
+        //Load the image file
         playerImg = new Texture(Gdx.files.internal("mc.png"));
         background = new Texture(Gdx.files.internal("background.png"));
         appleImg = new Texture(Gdx.files.internal("apple.png"));
-        //load the sound file
+
+        //Load the sound file
         eating = Gdx.audio.newSound(Gdx.files.internal("eating.ogg"));
         music = Gdx.audio.newMusic(Gdx.files.internal("Overworld1.ogg"));
+
         //Start music
         music.setLooping(true);
         music.setVolume((float) 0.1);
         music.play();
-        //create camera
+
+        //Create camera
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
-        //create batch
+        camera.setToOrtho(false, MAX_WIDTH, MAX_HEIGHT);
+
+        //Create batch
         batch = new SpriteBatch();
         player = new Player();
+
+        //Setting player values
         player.width = 64;
         player.height = 64;
         player.x = MAX_WIDTH / 2 - player.width / 2;
         player.y = 20;
 
-
+        //Creating apples array and starting the spawnApple() function
         apples = new Array<>();
         spawnApple();
 
@@ -72,10 +82,10 @@ public class Game extends ApplicationAdapter {
 
     private void spawnApple() {
         Rectangle apple = new Rectangle();
-        apple.width = 32;
-        apple.height = 39;
+        apple.width = (float) (32 * scale);
+        apple.height = (float) (39 * scale);
         apple.x = MathUtils.random(0, MAX_WIDTH - apple.width);
-        apple.y = MathUtils.random(MAX_HEIGHT/3, MAX_HEIGHT - apple.height);
+        apple.y = MathUtils.random(MAX_HEIGHT / 3, MAX_HEIGHT - apple.height);
         apples.add(apple);
         lastApple = TimeUtils.nanoTime();
     }
@@ -86,16 +96,16 @@ public class Game extends ApplicationAdapter {
 
     public void update() {
         if (leftMove) {
-            player.x -= 200 * Gdx.graphics.getDeltaTime();
+            player.x -= 200 * scale * Gdx.graphics.getDeltaTime();
         }
         if (rightMove) {
-            player.x += 200 * Gdx.graphics.getDeltaTime();
+            player.x += 200 * scale * Gdx.graphics.getDeltaTime();
         }
         if (upMove) {
-            player.y += 200 * Gdx.graphics.getDeltaTime();
+            player.y += 200 * scale * Gdx.graphics.getDeltaTime();
         }
         if (downMove) {
-            player.y -= 200 * Gdx.graphics.getDeltaTime();
+            player.y -= 200 * scale * Gdx.graphics.getDeltaTime();
         }
         if (player.x > MAX_WIDTH - player.width) player.x = MAX_WIDTH - player.width;
         if (player.x < 0) player.x = 0;
